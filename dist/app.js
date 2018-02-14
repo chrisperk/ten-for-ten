@@ -8,4 +8,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
-app.listen(3000);
+app.get('/dilly', function (req, res, next) {
+    res.json([{
+        id: 1,
+        username: 'test'
+    }, {
+        id: 2,
+        username: 'sample'
+    }]);
+});
+
+app.listen(3001);
