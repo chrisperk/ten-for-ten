@@ -22,3 +22,11 @@ main {
     width: 50%;
     background-color: aqua;
 }
+
+span {
+    display: none;
+}
+
+.visible {
+    display: inline;
+}
