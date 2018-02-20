@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Quiz from './components/Quiz/Quiz';
+import Scores from './components/Scores/Scores';
 import './App.css';
 
 let timer;
@@ -90,7 +91,10 @@ class App extends Component {
         timer = this.beginTimer();
       } else {
         console.log(this.state.highScores, this.state.score);
-        const newScores = this.state.highScores.concat([this.state.score]);
+        const newScores = this.state.highScores.concat([{
+          score: this.state.score,
+          key: Date.now()
+        }]);
         console.log(newScores);
         const newState = this.state;
         newState.highScores = newScores;
@@ -123,6 +127,9 @@ class App extends Component {
           question={this.state.currentQuestion}
           timeRemaining={this.state.timeRemaining}
           onStartOver={this.handleStartOver.bind(this)}
+        />
+        <Scores 
+          scores={this.state.highScores}
         />
       </div>
     );
