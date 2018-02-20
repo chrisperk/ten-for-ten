@@ -107,11 +107,13 @@ class App extends Component {
     clearInterval(timer);
     const newState = initialState;
     newState.highScores = this.state.highScores;
-    const currentQuestion = this.state.questions[this.state.currentQuestionIndex];
+    const currentQuestion = newState.questions[newState.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
     this.setState(newState);
+    console.log(this.state.currentQuestion);
     timer = this.beginTimer();
     console.log('end');
+    console.log(this.state.currentQuestion);
   }
 
   render() {
