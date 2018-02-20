@@ -23,8 +23,6 @@ const initialState = {
   currentQuestionIndex: 0,
   timeRemaining: timeAllowed,
   score: 0,
-  userAnswer: null,
-  users: [],
   highScores: []
 }
 
@@ -108,6 +106,7 @@ class App extends Component {
     console.log('resetting');
     clearInterval(timer);
     const newState = initialState;
+    newState.highScores = this.state.highScores;
     const currentQuestion = this.state.questions[this.state.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
     this.setState(newState);
