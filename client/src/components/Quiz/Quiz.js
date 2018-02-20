@@ -2,12 +2,16 @@ import React from 'react';
 import './Quiz.css';
 
 const Quiz = props => {
+    const progressBarStyle = {
+        width: `${props.timeRemaining * 10}%`
+    };
+
     return (
         <div className="question-wrapper">
             <main>
                 <section id="timer">
-                    <div id="progress-bar"></div>
-                    {props.question.timeRemaining}
+                    <div style={progressBarStyle} id="progress-bar"></div>
+                    <span id="timer-text">{props.timeRemaining}</span>
                 </section>
                 <section id="question">
                     <div id="text">{props.question.text}</div>
@@ -20,6 +24,9 @@ const Quiz = props => {
                             Incorrect
                         </span>
                     </div>
+                </section>
+                <section>
+                    <button type="button" onClick={e => props.onStartOver(e)}>Start Over</button>
                 </section>
             </main>
         </div>

@@ -16,6 +16,18 @@ main {
     height: 50px;
 }
 
+#progress-bar {
+    height: 50px;
+    background-color: purple;
+    transition: all 1s linear;
+}
+
+#timer-text {
+    position: relative;
+    display: inline;
+    bottom: 35px;
+}
+
 #time-remaining {
     position: relative;
     height: 100%;

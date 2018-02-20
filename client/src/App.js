@@ -3,34 +3,36 @@ import Quiz from './components/Quiz/Quiz';
 import './App.css';
 
 let timer;
+const timeAllowed = 10;
+const initialState = {
+  questions: [
+    {
+      text: 'What is 2 + 2?',
+      answer: 4,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 4 + 4?',
+      answer: 8,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    }
+  ],
+  currentQuestion: null,
+  currentQuestionIndex: 0,
+  timeRemaining: timeAllowed,
+  score: 0,
+  userAnswer: null,
+  users: [],
+  highScores: []
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      questions: [
-        {
-          text: 'What is 2 + 2?',
-          answer: 4,
-          directions: '(Press 0-9 on keyboard to answer.)',
-          timeRemaining: 10,
-          isUserAnswerCorrect: null
-        },
-        {
-          text: 'What is 4 + 4?',
-          answer: 8,
-          directions: '(Press 0-9 on keyboard to answer.)',
-          timeRemaining: 10,
-          isUserAnswerCorrect: null
-        }
-      ],
-      currentQuestion: null,
-      currentQuestionIndex: 0,
-      score: 0,
-      userAnswer: null,
-      users: []
-    }
+    this.state = initialState;
   }
 
   componentWillMount() {
@@ -40,20 +42,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/dilly')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
+    // fetch('/dilly')
+    //   .then(res => res.json())
+    //   .then(users => this.setState({ users }));
     timer = this.beginTimer();
-    console.log(timer);
   }
 
   beginTimer() {
     return setInterval(
       () => {
-        const currentQuestion = this.state.currentQuestion;
-        if (currentQuestion.timeRemaining > 0) {
-          currentQuestion.timeRemaining = currentQuestion.timeRemaining - 1;
-          this.setState({ currentQuestion });
+        let timeRemaining = this.state.timeRemaining;
+        if (timeRemaining > 0) {
+          timeRemaining -= 1;
+          this.setState({ timeRemaining });
         }    
       }, 1000);
   }
@@ -65,16 +66,13 @@ class App extends Component {
     if (!keyChoices.includes(input)) return;
     clearInterval(timer);
     if (input === currentQuestion.answer) {
-      console.log('correct');
       currentQuestion.isUserAnswerCorrect = true;
       this.setState({ 
         currentQuestion,
-        score: this.state.score + (currentQuestion.timeRemaining)
+        score: this.state.score + (this.state.timeRemaining)
       });
-      console.log(this.state.score);
       this.proceedToNextQuestion();
     } else {
-      console.log('incorrect');
       currentQuestion.isUserAnswerCorrect = false;
       this.setState({ currentQuestion });
       this.proceedToNextQuestion();
@@ -83,15 +81,38 @@ class App extends Component {
 
   proceedToNextQuestion() {
     setTimeout(() => {
-      if (this.state.currentQuestionIndex < this.state.questions.length - 1) {
-        this.setState({
-          currentQuestionIndex: this.state.currentQuestionIndex + 1
-        });
-        const currentQuestion = this.state.questions[this.state.currentQuestionIndex];
-        this.setState({ currentQuestion });
+      const currentIndex = this.state.currentQuestionIndex;
+      const newIndex = currentIndex + 1;
+      const questions = this.state.questions;
+
+      if (currentIndex < questions.length - 1) {
+        this.setState({ currentQuestionIndex: newIndex });
+        const currentQuestion = questions[newIndex];
+        this.setState({ currentQuestion, timeRemaining: timeAllowed });
         timer = this.beginTimer();
+      } else {
+        console.log(this.state.highScores, this.state.score);
+        const newScores = this.state.highScores.concat([this.state.score]);
+        console.log(newScores);
+        const newState = this.state;
+        newState.highScores = newScores;
+        console.log(newState);
+        this.setState(newState);
+        console.log(this.state.highScores);
+        this.handleStartOver();
       }
     }, 2000);
+  }
+
+  handleStartOver() {
+    console.log('resetting');
+    clearInterval(timer);
+    const newState = initialState;
+    const currentQuestion = this.state.questions[this.state.currentQuestionIndex];
+    newState.currentQuestion = currentQuestion;
+    this.setState(newState);
+    timer = this.beginTimer();
+    console.log('end');
   }
 
   render() {
@@ -99,6 +120,8 @@ class App extends Component {
       <div className="App">
         <Quiz 
           question={this.state.currentQuestion}
+          timeRemaining={this.state.timeRemaining}
+          onStartOver={this.handleStartOver.bind(this)}
         />
       </div>
     );
