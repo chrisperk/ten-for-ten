@@ -104,9 +104,8 @@ class App extends Component {
         console.log(newState);
         this.setState(newState);
         console.log(this.state.highScores);
-        this.handleStartOver();
       }
-    }, 2000);
+    }, 1000);
   }
 
   handleStartOver() {
@@ -128,14 +127,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Quiz 
-          question={this.state.currentQuestion}
-          timeRemaining={this.state.timeRemaining}
-          onStartOver={this.handleStartOver.bind(this)}
-        />
-        <Scores 
-          scores={this.state.highScores}
-        />
+      <div className="header"></div>
+        <div className="quiz-wrapper">
+          <Quiz 
+            question={this.state.currentQuestion}
+            timeRemaining={this.state.timeRemaining}
+            onStartOver={this.handleStartOver.bind(this)}
+          />
+        </div>
+        <div className="scores-wrapper">
+          <Scores 
+            scores={this.state.highScores}
+          />
+        </div>
       </div>
     );
   }

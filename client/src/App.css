@@ -1,30 +1,31 @@
 .App {
   text-align: center;
   height: 100vh;
-  overflow: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 200px;
+  grid-template-rows: 50px auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.header {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
+  border: 1px solid black;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.quiz-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.scores-wrapper {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  border: 1px solid black;
 }
