@@ -31,7 +31,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = initialState;
+    this.state = JSON.parse(JSON.stringify(initialState));
   }
 
   componentWillMount() {
@@ -54,7 +54,10 @@ class App extends Component {
         if (timeRemaining > 0) {
           timeRemaining -= 1;
           this.setState({ timeRemaining });
-        }    
+        } else {
+          clearInterval(timer);
+          this.proceedToNextQuestion();
+        }   
       }, 1000);
   }
 
@@ -111,6 +114,8 @@ class App extends Component {
     clearInterval(timer);
     const newState = initialState;
     newState.highScores = this.state.highScores;
+    console.log(initialState);
+    console.log(newState.questions);
     const currentQuestion = newState.questions[newState.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
     this.setState(newState);

@@ -35,10 +35,23 @@ main {
     background-color: aqua;
 }
 
-span {
-    display: none;
+.indicator {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    opacity: 0.3;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-.visible {
-    display: inline;
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
+
+.active {
+    opacity: 1;
 }

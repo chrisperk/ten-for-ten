@@ -17,12 +17,8 @@ const Quiz = props => {
                     <div id="text">{props.question.text}</div>
                     <div id="directions">{props.question.directions}</div>
                     <div id="result">
-                        <span className={props.question.isUserAnswerCorrect === true ? 'visible' : ''}>
-                            Correct
-                        </span>
-                        <span className={props.question.isUserAnswerCorrect === false ? 'visible' : ''}>
-                            Incorrect
-                        </span>
+                        <span className={props.question.isUserAnswerCorrect === true ? 'active indicator correct' : 'indicator correct'}></span>
+                        <span className={props.question.isUserAnswerCorrect === false ? 'active indicator incorrect' : 'indicator incorrect'}></span>
                     </div>
                 </section>
                 <section>
