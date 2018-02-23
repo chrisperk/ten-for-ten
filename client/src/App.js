@@ -127,7 +127,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <div className="header"></div>
+        <nav className="header">
+          <div className="brand">Ten for Ten</div>
+          <div className="nav-buttons">
+            <span>Login</span>
+            <span>Sign Up</span>
+          </div>
+        </nav>
         <div className="quiz-wrapper">
           <Quiz 
             question={this.state.currentQuestion}

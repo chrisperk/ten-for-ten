@@ -11,6 +11,22 @@
   grid-column: 1 / span 2;
   grid-row: 1 / span 1;
   border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .brand {
+  margin: 0 40px;
+  font-size: 30px;
+}
+
+.header div {
+  display: inline-block;
+}
+
+.header span {
+  margin-right: 40px;
 }
 
 .quiz-wrapper {
