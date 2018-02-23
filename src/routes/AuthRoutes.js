@@ -19,7 +19,9 @@ router.post('/api/login', signinStrategy, (req, res) => {
 });
 
 router.post('/api/signup', (req, res, next) => {
+    console.log('hi');
     const { username, password } = req.body;
+    console.log(username, password);
 
     if (!username || !password) {
         return res.status(422)
@@ -32,9 +34,10 @@ router.post('/api/signup', (req, res, next) => {
                 return res.status(422).json( { error: 'Username is in use' });
             }
 
-            brcypt.hash(password, 10, (err, hashedPassword) => {
+            bcrypt.hash(password, 10, (err, hashedPassword) => {
+                console.log(hashedPassword);
                 if (err) {
-                    return next(error);
+                    return next(err);
                 }
 
                 const user = new User({ username, password: hashedPassword });
@@ -43,7 +46,7 @@ router.post('/api/signup', (req, res, next) => {
                     .then(newUser => res.json({ token: tokenForUser(newUser) }));
             });
         })
-        .catch(err => next(error));
+        .catch(err => next(err));
 });
 
 export default router;

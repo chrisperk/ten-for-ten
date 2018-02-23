@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./client/,./.babelrc,./package.json,./npm-debug.log,./yarn-lock,./README.md --copy-files",
-    "start": "npm run build && nodemon dist/app.js"
+    "start": "npm run build && nodemon dist/src/app.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/chrisperk/ten-for-ten#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",

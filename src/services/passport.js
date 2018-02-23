@@ -1,3 +1,4 @@
+require('dotenv').config();
 import bcrypt from 'bcrypt';
 import passport from 'passport';
 import User from '../models/UserModel';
