@@ -33,7 +33,9 @@ var router = _express2.default.Router();
 router.get('/api/scores', function (req, res, next) {
     _ScoreModel2.default.find().exec().then(function (scores) {
         return res.status(400).json({ scores: scores });
-    }).catch(next(err));
+    }).catch(function (err) {
+        return next(err);
+    });
 });
 
 router.post('/api/score', function (req, res, next) {
@@ -47,7 +49,7 @@ router.post('/api/score', function (req, res, next) {
     scoreRecord.save().then(function (score) {
         return res.json(score);
     }).catch(function (err) {
-        return next(error);
+        return next(err);
     });
 });
 

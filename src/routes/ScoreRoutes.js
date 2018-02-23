@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/api/scores', (req, res, next) => {
     Score.find().exec()
         .then(scores => res.status(400).json({ scores }))
-        .catch(next(err));
+        .catch(err => next(err));
 });
 
 router.post('/api/score', (req, res, next) => {
@@ -20,7 +20,7 @@ router.post('/api/score', (req, res, next) => {
 
     scoreRecord.save()
         .then(score => res.json(score))
-        .catch(err => next(error));
+        .catch(err => next(err));
 });
 
 export default router;
