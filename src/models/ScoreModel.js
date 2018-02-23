@@ -1,18 +1,17 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const scoreSchema = new Schema({
     username: {
         type: String,
-        unique: true,
         lowercase: true,
         required: true
     },
 
-    password: {
-        type: String,
+    score: {
+        type: Number,
         required: true
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Score', scoreSchema);
