@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Quiz from './components/Quiz/Quiz';
 import Scores from './components/Scores/Scores';
+import SignUpModal from './components/modals/SignUpModal/SignUpModal';
 import './App.css';
 
 let timer;
@@ -24,7 +25,14 @@ const initialState = {
   currentQuestionIndex: 0,
   timeRemaining: timeAllowed,
   score: 0,
-  highScores: []
+  highScores: [],
+  signUpModal: {
+    isShown: false,
+    input: {
+      username: '',
+      password: ''
+    }
+  }
 }
 
 class App extends Component {
@@ -93,45 +101,86 @@ class App extends Component {
         this.setState({ currentQuestion, timeRemaining: timeAllowed });
         timer = this.beginTimer();
       } else {
-        console.log(this.state.highScores, this.state.score);
         const newScores = this.state.highScores.concat([{
           score: this.state.score,
           key: Date.now()
         }]);
-        console.log(newScores);
         const newState = this.state;
         newState.highScores = newScores;
-        console.log(newState);
         this.setState(newState);
-        console.log(this.state.highScores);
       }
     }, 1000);
   }
 
   handleStartOver() {
-    console.log('resetting');
     clearInterval(timer);
     const newState = initialState;
     newState.highScores = this.state.highScores;
-    console.log(initialState);
-    console.log(newState.questions);
     const currentQuestion = newState.questions[newState.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
     this.setState(newState);
-    console.log(this.state.currentQuestion);
     timer = this.beginTimer();
-    console.log('end');
-    console.log(this.state.currentQuestion);
+  }
+
+  handleOpenSignUpModal() {
+    const newSignUpModalState = this.state.signUpModal;
+    newSignUpModalState.isShown = true;
+    this.setState({ signUpModal: newSignUpModalState });
+  }
+
+  handleSignUpUsernameChange(e) {
+    const newSignUpModalState = this.state.signUpModal;
+    newSignUpModalState.input.username = e.target.value;
+    this.setState({ signUpModal: newSignUpModalState });
+  }
+
+  handleSignUpPasswordChange(e) {
+    const newSignUpModalState = this.state.signUpModal;
+    newSignUpModalState.input.password = e.target.value;
+    this.setState({ signUpModal: newSignUpModalState });
+  }
+
+  postData(url, data) {
+    return fetch(url, {
+      body: JSON.stringify(data),
+      cache: 'no-cache',
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .catch(err => console.log(err));
+  }
+
+  handleSignUpSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    this.postData('/api/signup', {
+      username: this.state.signUpModal.input.username,
+      password: this.state.signUpModal.input.password
+    })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
 
   render() {
     return (
       <div className="App">
+        <div className={this.state.signUpModal.isShown ? "modal-wrapper active" : "modal-wrapper"}>
+          <SignUpModal 
+            signUpModal={this.state.signUpModal}
+            onUsernameChange={this.handleSignUpUsernameChange.bind(this)}
+            onPasswordChange={this.handleSignUpPasswordChange.bind(this)}
+            onSignUpSubmit={this.handleSignUpSubmit.bind(this)} />
+        </div>
         <nav className="header">
           <div className="brand">Ten for Ten</div>
           <div className="nav-buttons">
             <span>Login</span>
-            <span>Sign Up</span>
+            <span onClick={this.handleOpenSignUpModal.bind(this)}>
+              Sign Up
+            </span>
           </div>
         </nav>
         <div className="quiz-wrapper">

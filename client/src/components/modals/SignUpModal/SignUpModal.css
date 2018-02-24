@@ -1,0 +1,7 @@
+.modal {
+    width: 400px;
+    height: 600px;
+    background-color: white;
+    position: relative;
+    z-index: 2;
+}

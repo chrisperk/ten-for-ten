@@ -45,3 +45,17 @@
   overflow-y: auto;
   border: 1px solid black;
 }
+
+.modal-wrapper {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+}
+
+.active {
+  display: block;
+}
