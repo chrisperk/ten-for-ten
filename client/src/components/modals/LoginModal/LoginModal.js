@@ -1,17 +1,17 @@
 import React from 'react';
-import './SignUpModal.css';
+import './LoginModal.css';
 
-const SignUpModal = props => {
+const LoginModal = props => {
     return (
         <div className="modal">
-            <h1>Sign Up</h1>
-            <form onSubmit={props.onSignUpSubmit}>
+            <h1>Login</h1>
+            <form onSubmit={props.onLoginSubmit}>
                 <label htmlFor="username">Username:</label>
                 <input 
                     type="text"
                     id="username"
                     name="username" 
-                    value={props.signUpModal.input.username} 
+                    value={props.loginModal.input.username} 
                     onChange={e => props.onUsernameChange(e)} />
                 <br />
                 <label htmlFor="password">Password:</label>
@@ -19,7 +19,7 @@ const SignUpModal = props => {
                     type="text"
                     id="password"
                     name="password" 
-                    value={props.signUpModal.input.password} 
+                    value={props.loginModal.input.password} 
                     onChange={e => props.onPasswordChange(e)} />
                     <br />
                 <button type="submit">Submit</button>
@@ -28,4 +28,4 @@ const SignUpModal = props => {
     );
 }
 
-export default SignUpModal;
+export default LoginModal;

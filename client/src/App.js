@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Quiz from './components/Quiz/Quiz';
 import Scores from './components/Scores/Scores';
 import SignUpModal from './components/modals/SignUpModal/SignUpModal';
+import LoginModal from './components/modals/LoginModal/LoginModal';
 import './App.css';
 
 let timer;
@@ -27,6 +28,13 @@ const initialState = {
   score: 0,
   highScores: [],
   signUpModal: {
+    isShown: false,
+    input: {
+      username: '',
+      password: ''
+    }
+  },
+  loginModal: {
     isShown: false,
     input: {
       username: '',
@@ -140,6 +148,25 @@ class App extends Component {
     this.setState({ signUpModal: newSignUpModalState });
   }
 
+  handleOpenLoginModal() {
+    const newLoginModalState = this.state.loginModal;
+    newLoginModalState.isShown = true;
+    this.setState({ loginModal: newLoginModalState });
+    console.log(this.state);
+  }
+
+  handleLoginUsernameChange(e) {
+    const newLoginModalState = this.state.loginModal;
+    newLoginModalState.input.username = e.target.value;
+    this.setState({ loginModal: newLoginModalState });
+  }
+
+  handleLoginPasswordChange(e) {
+    const newLoginModalState = this.state.loginModal;
+    newLoginModalState.input.password = e.target.value;
+    this.setState({ loginModal: newLoginModalState });
+  }
+
   postData(url, data) {
     return fetch(url, {
       body: JSON.stringify(data),
@@ -164,6 +191,17 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  handleLoginSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    this.postData('/api/login', {
+      username: this.state.loginModal.input.username,
+      password: this.state.loginModal.input.password
+    })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="App">
@@ -174,10 +212,17 @@ class App extends Component {
             onPasswordChange={this.handleSignUpPasswordChange.bind(this)}
             onSignUpSubmit={this.handleSignUpSubmit.bind(this)} />
         </div>
+        <div className={this.state.loginModal.isShown ? "modal-wrapper active" : "modal-wrapper"}>
+          <LoginModal 
+            loginModal={this.state.loginModal}
+            onUsernameChange={this.handleLoginUsernameChange.bind(this)}
+            onPasswordChange={this.handleLoginPasswordChange.bind(this)}
+            onLoginSubmit={this.handleLoginSubmit.bind(this)} />
+        </div>
         <nav className="header">
           <div className="brand">Ten for Ten</div>
           <div className="nav-buttons">
-            <span>Login</span>
+            <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
             <span onClick={this.handleOpenSignUpModal.bind(this)}>
               Sign Up
             </span>
