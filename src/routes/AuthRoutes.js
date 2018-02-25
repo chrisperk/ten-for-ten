@@ -15,7 +15,7 @@ function tokenForUser(user) {
 }
 
 router.post('/api/login', signinStrategy, (req, res) => {
-    res.json({ token: tokenForUser(req.user) });
+    res.json({ username: req.user.username, token: tokenForUser(req.user) });
 });
 
 router.post('/api/signup', (req, res, next) => {

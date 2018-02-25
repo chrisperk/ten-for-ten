@@ -22,6 +22,7 @@ const initialState = {
       isUserAnswerCorrect: null
     }
   ],
+  activeUser: null,
   currentQuestion: null,
   currentQuestionIndex: 0,
   timeRemaining: timeAllowed,
@@ -123,6 +124,7 @@ class App extends Component {
   handleStartOver() {
     clearInterval(timer);
     const newState = initialState;
+    newState.activeUser = this.state.activeUser;
     newState.highScores = this.state.highScores;
     const currentQuestion = newState.questions[newState.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
@@ -198,7 +200,11 @@ class App extends Component {
       username: this.state.loginModal.input.username,
       password: this.state.loginModal.input.password
     })
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        this.setState({activeUser: data.username});
+        console.log(this.state);
+      })
       .catch(err => console.log(err));
   }
 
@@ -221,12 +227,17 @@ class App extends Component {
         </div>
         <nav className="header">
           <div className="brand">Ten for Ten</div>
-          <div className="nav-buttons">
-            <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
-            <span onClick={this.handleOpenSignUpModal.bind(this)}>
-              Sign Up
-            </span>
-          </div>
+          {this.state.activeUser ? 
+            <div>
+              <span>Logged in as {this.state.activeUser}</span>
+            </div> :
+            <div className="nav-buttons">
+              <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
+              <span onClick={this.handleOpenSignUpModal.bind(this)}>
+                Sign Up
+              </span>
+            </div>
+          }
         </nav>
         <div className="quiz-wrapper">
           <Quiz 
