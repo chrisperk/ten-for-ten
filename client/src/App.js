@@ -208,6 +208,27 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  handleCloseModal(e) {
+    console.log(e.target);
+    const modalWrappers = Array.from(document.querySelectorAll('.modal-wrapper'));
+    console.log(modalWrappers);
+
+    if (modalWrappers.includes(e.target)) {
+      const newSignupState = this.state.signUpModal;
+      newSignupState.isShown = false;
+      const newLoginState = this.state.loginModal;
+      newLoginState.isShown = false;
+      this.setState({ 
+        signUpModal: newSignupState, 
+        loginModal: newLoginState 
+      });
+    }
+  }
+
+  handleLogout() {
+    this.setState({ activeUser: null });
+  }
+
   render() {
     return (
       <div className="App">
@@ -218,9 +239,16 @@ class App extends Component {
             onPasswordChange={this.handleSignUpPasswordChange.bind(this)}
             onSignUpSubmit={this.handleSignUpSubmit.bind(this)} />
         </div>
-        <div className={this.state.loginModal.isShown ? "modal-wrapper active" : "modal-wrapper"}>
+        <div 
+          className={
+            this.state.loginModal.isShown ? 
+            "modal-wrapper active" : 
+            "modal-wrapper"
+          }
+          onClick={this.handleCloseModal.bind(this)}>
           <LoginModal 
             loginModal={this.state.loginModal}
+            activeUser={this.state.activeUser}
             onUsernameChange={this.handleLoginUsernameChange.bind(this)}
             onPasswordChange={this.handleLoginPasswordChange.bind(this)}
             onLoginSubmit={this.handleLoginSubmit.bind(this)} />
@@ -230,6 +258,7 @@ class App extends Component {
           {this.state.activeUser ? 
             <div>
               <span>Logged in as {this.state.activeUser}</span>
+              <a href="javascript:;" onClick={this.handleLogout.bind(this)}>(Logout)</a>
             </div> :
             <div className="nav-buttons">
               <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
