@@ -7,7 +7,7 @@ const Quiz = props => {
     };
 
     return (
-        <main>
+        <div>
             <section id="timer">
                 <div style={progressBarStyle} id="progress-bar"></div>
                 <span id="timer-text">{props.timeRemaining}</span>
@@ -26,7 +26,7 @@ const Quiz = props => {
             <section>
                 <button type="button" onClick={e => props.onStartOver(e)}>Start Over</button>
             </section>
-        </main>
+        </div>
     );
 }
 

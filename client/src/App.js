@@ -252,7 +252,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className={this.state.signUpModal.isShown ? "modal-wrapper active" : "modal-wrapper"}>
+        <div className={
+          this.state.signUpModal.isShown ? 
+          "modal-wrapper active" : 
+          "modal-wrapper"}
+          onClick={this.handleCloseModal.bind(this)}>
           <SignUpModal 
             signUpModal={this.state.signUpModal}
             onUsernameChange={this.handleSignUpUsernameChange.bind(this)}
@@ -288,7 +292,7 @@ class App extends Component {
             </div>
           }
         </nav>
-        <div className="quiz-wrapper">
+        <main className="quiz-wrapper">
           {!this.state.activeUser ? <div>Free Play</div> : null}
           {this.state.isStarted ? 
             <Quiz 
@@ -300,12 +304,12 @@ class App extends Component {
               <button type="button" onClick={this.startQuiz.bind(this)}>Start</button>
             </div>
           }
-        </div>
-        <div className="scores-wrapper">
+        </main>
+        <aside className="scores-wrapper">
           <Scores 
             scores={this.state.highScores}
           />
-        </div>
+        </aside>
       </div>
     );
   }
