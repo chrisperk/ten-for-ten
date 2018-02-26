@@ -204,7 +204,11 @@ class App extends Component {
       username: this.state.signUpModal.input.username,
       password: this.state.signUpModal.input.password
     })
-      .then(data => console.log(data))
+      .then(() => this.postData('/api/login', {
+        username: this.state.signUpModal.input.username,
+        password: this.state.signUpModal.input.password
+      }))
+      .then(data => this.setState({activeUser: data.username}))
       .catch(err => console.log(err));
   }
 
@@ -215,11 +219,7 @@ class App extends Component {
       username: this.state.loginModal.input.username,
       password: this.state.loginModal.input.password
     })
-      .then(data => {
-        console.log(data);
-        this.setState({activeUser: data.username});
-        console.log(this.state);
-      })
+      .then(data => this.setState({activeUser: data.username}))
       .catch(err => console.log(err));
   }
 
@@ -259,6 +259,7 @@ class App extends Component {
           onClick={this.handleCloseModal.bind(this)}>
           <SignUpModal 
             signUpModal={this.state.signUpModal}
+            activeUser={this.state.activeUser}
             onUsernameChange={this.handleSignUpUsernameChange.bind(this)}
             onPasswordChange={this.handleSignUpPasswordChange.bind(this)}
             onSignUpSubmit={this.handleSignUpSubmit.bind(this)} />
