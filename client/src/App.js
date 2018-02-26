@@ -23,6 +23,7 @@ const initialState = {
     }
   ],
   activeUser: null,
+  isStarted: false,
   currentQuestion: null,
   currentQuestionIndex: 0,
   timeRemaining: timeAllowed,
@@ -61,7 +62,6 @@ class App extends Component {
     // fetch('/dilly')
     //   .then(res => res.json())
     //   .then(users => this.setState({ users }));
-    timer = this.beginTimer();
   }
 
   beginTimer() {
@@ -79,7 +79,8 @@ class App extends Component {
   }
 
   handleUserAnswer(e) {
-    const currentQuestion = this.state.questions[this.state.currentQuestionIndex];
+    if (!this.state.isStarted) return;
+    const currentQuestion = JSON.parse(JSON.stringify(this.state.questions[this.state.currentQuestionIndex]));
     const input = parseInt(e.key, 10);
     const keyChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     if (!keyChoices.includes(input)) return;
@@ -128,6 +129,7 @@ class App extends Component {
     newState.highScores = this.state.highScores;
     const currentQuestion = newState.questions[newState.currentQuestionIndex];
     newState.currentQuestion = currentQuestion;
+    newState.isStarted = true;
     this.setState(newState);
     timer = this.beginTimer();
   }
@@ -229,6 +231,11 @@ class App extends Component {
     this.setState({ activeUser: null });
   }
 
+  startQuiz() {
+    this.setState({ isStarted: true });
+    timer = this.beginTimer();
+  }
+
   render() {
     return (
       <div className="App">
@@ -258,7 +265,7 @@ class App extends Component {
           {this.state.activeUser ? 
             <div>
               <span>Logged in as {this.state.activeUser}</span>
-              <a href="javascript:;" onClick={this.handleLogout.bind(this)}>(Logout)</a>
+              <a onClick={this.handleLogout.bind(this)}>(Logout)</a>
             </div> :
             <div className="nav-buttons">
               <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
@@ -269,11 +276,16 @@ class App extends Component {
           }
         </nav>
         <div className="quiz-wrapper">
-          <Quiz 
-            question={this.state.currentQuestion}
-            timeRemaining={this.state.timeRemaining}
-            onStartOver={this.handleStartOver.bind(this)}
-          />
+          {this.state.isStarted ? 
+            <Quiz 
+              question={this.state.currentQuestion}
+              timeRemaining={this.state.timeRemaining}
+              onStartOver={this.handleStartOver.bind(this)}
+            /> :
+            <div>
+              <button type="button" onClick={this.startQuiz.bind(this)}>Start</button>
+            </div>
+          }
         </div>
         <div className="scores-wrapper">
           <Scores 
