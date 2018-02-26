@@ -294,7 +294,7 @@ class App extends Component {
           }
         </nav>
         <main className="quiz-wrapper">
-          {!this.state.activeUser ? <div>Free Play</div> : null}
+          {!this.state.activeUser ? <div className="notification">Free Play</div> : null}
           {this.state.isStarted ? 
             <Quiz 
               question={this.state.currentQuestion}
@@ -302,7 +302,12 @@ class App extends Component {
               onStartOver={this.handleStartOver.bind(this)}
             /> :
             <div>
-              <button type="button" onClick={this.startQuiz.bind(this)}>Start</button>
+              <button 
+                type="button"
+                className="start-button" 
+                onClick={this.startQuiz.bind(this)}>
+                Start
+              </button>
             </div>
           }
         </main>

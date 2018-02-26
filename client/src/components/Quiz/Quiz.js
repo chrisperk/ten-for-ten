@@ -1,5 +1,5 @@
 import React from 'react';
-import './Quiz.css';
+// import './Quiz.css';
 
 const Quiz = props => {
     const progressBarStyle = {
@@ -7,7 +7,7 @@ const Quiz = props => {
     };
 
     return (
-        <div>
+        <div className="quiz-box">
             <section id="timer">
                 <div style={progressBarStyle} id="progress-bar"></div>
                 <span id="timer-text">{props.timeRemaining}</span>
@@ -24,7 +24,12 @@ const Quiz = props => {
                 </div>
             </section>
             <section>
-                <button type="button" onClick={e => props.onStartOver(e)}>Start Over</button>
+                <button 
+                    type="button"
+                    className="startover-button" 
+                    onClick={e => props.onStartOver(e)}>
+                    Start Over
+                </button>
             </section>
         </div>
     );
