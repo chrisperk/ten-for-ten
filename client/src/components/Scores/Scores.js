@@ -3,7 +3,7 @@ import './Scores.css';
 
 const Scores = props => {
     return (
-        <div>
+        <div className="scores-panel">
             <div>High Scores</div>
             <ol>
                 {props.scores.map(score => {
