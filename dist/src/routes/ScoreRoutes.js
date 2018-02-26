@@ -32,6 +32,24 @@ var router = _express2.default.Router();
 
 router.get('/api/scores', function (req, res, next) {
     _ScoreModel2.default.find().exec().then(function (scores) {
+        scores = scores.sort(function (a, b) {
+            return b.score - a.score;
+        });
+        if (scores.length > 10) {
+            scores = scores.slice(0, 10);
+        }
+        if (scores.length < 10) {
+            var count = scores.length;
+            for (var i = count; i < 10; i++) {
+                scores[i] = {
+                    username: '-----',
+                    score: '--',
+                    _id: 'placeholder' + i
+                };
+            }
+        }
+        return scores;
+    }).then(function (scores) {
         return res.json(scores);
     }).catch(function (err) {
         return next(err);
