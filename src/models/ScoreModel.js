@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const scoreSchema = new Schema({
     username: {
         type: String,
-        lowercase: true,
         required: true
     },
 

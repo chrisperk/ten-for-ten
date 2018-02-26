@@ -32,7 +32,7 @@ var router = _express2.default.Router();
 
 router.get('/api/scores', function (req, res, next) {
     _ScoreModel2.default.find().exec().then(function (scores) {
-        return res.status(400).json({ scores: scores });
+        return res.json(scores);
     }).catch(function (err) {
         return next(err);
     });

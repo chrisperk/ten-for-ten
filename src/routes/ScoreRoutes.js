@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/api/scores', (req, res, next) => {
     Score.find().exec()
-        .then(scores => res.status(400).json({ scores }))
+        .then(scores => res.json(scores))
         .catch(err => next(err));
 });
 

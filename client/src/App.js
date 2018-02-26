@@ -59,9 +59,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch('/dilly')
-    //   .then(res => res.json())
-    //   .then(users => this.setState({ users }));
+    this.getHighScores.call(this);
+  }
+
+  getHighScores() {
+    fetch('/api/scores')
+      .then(res => res.json())
+      .then(highScores => this.setState({ highScores }))
+      .catch(err => console.log(err));
   }
 
   beginTimer() {
@@ -111,13 +116,21 @@ class App extends Component {
         this.setState({ currentQuestion, timeRemaining: timeAllowed });
         timer = this.beginTimer();
       } else {
-        const newScores = this.state.highScores.concat([{
-          score: this.state.score,
-          key: Date.now()
-        }]);
-        const newState = this.state;
-        newState.highScores = newScores;
-        this.setState(newState);
+        if (this.state.activeUser) {
+          // const newScores = this.state.highScores.concat([{
+          //   score: this.state.score,
+          //   username: this.state.activeUser
+          // }]);
+          // const newState = this.state;
+          // newState.highScores = newScores;
+          // this.setState(newState);
+          this.postData('/api/score', {
+            username: this.state.activeUser,
+            score: this.state.score
+          })
+            .then(() => this.getHighScores.call(this))
+            .catch(err => console.log(err));
+        }
       }
     }, 1000);
   }
@@ -276,6 +289,7 @@ class App extends Component {
           }
         </nav>
         <div className="quiz-wrapper">
+          {!this.state.activeUser ? <div>Free Play</div> : null}
           {this.state.isStarted ? 
             <Quiz 
               question={this.state.currentQuestion}

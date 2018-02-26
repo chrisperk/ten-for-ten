@@ -11,7 +11,6 @@ var Schema = _mongoose2.default.Schema;
 var scoreSchema = new Schema({
     username: {
         type: String,
-        lowercase: true,
         required: true
     },
 

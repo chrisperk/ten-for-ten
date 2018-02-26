@@ -3,11 +3,14 @@ import './Scores.css';
 
 const Scores = props => {
     return (
-        <ol>
-            {props.scores.map(score => {
-                return <li key={score.key}>{score.score}</li>;
-            })}
-        </ol>
+        <div>
+            <div>High Scores</div>
+            <ol>
+                {props.scores.map(score => {
+                    return <li key={score._id}>{score.username} - {score.score}</li>;
+                })}
+            </ol>
+        </div>
     );
 }
 
