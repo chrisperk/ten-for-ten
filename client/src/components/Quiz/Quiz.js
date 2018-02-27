@@ -5,6 +5,7 @@ const Quiz = props => {
     const progressBarStyle = {
         width: `${props.timeRemaining * 10}%`
     };
+    const inputs = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [0]];
 
     return (
         <div className="quiz-box">
@@ -15,6 +16,13 @@ const Quiz = props => {
             <section id="question">
                 <div id="text">{props.question.text}</div>
                 <div id="directions">{props.question.directions}</div>
+                <div id="numbers-input">
+                    {inputs.map(set => {
+                        return <div key={inputs.indexOf(set)}>
+                            {set.map(input => <span onClick={props.onKeypadInput} key={input}>{input}</span>)}
+                        </div>
+                    })}
+                </div>
                 <div id="result">
                     <div className={props.question.isUserAnswerCorrect ? 'points-display visible active' : 'points-display'}>
                         <span className={props.question.isUserAnswerCorrect ? 'active' : ''}>+{props.timeRemaining} points!</span>
@@ -23,7 +31,7 @@ const Quiz = props => {
                     <span className={props.question.isUserAnswerCorrect === false ? 'active indicator incorrect' : 'indicator incorrect'}></span>
                 </div>
             </section>
-            <section>
+            <section id="startover">
                 <button 
                     type="button"
                     className="startover-button" 

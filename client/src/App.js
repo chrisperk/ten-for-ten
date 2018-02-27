@@ -85,10 +85,20 @@ class App extends Component {
 
   handleUserAnswer(e) {
     if (!this.state.isStarted) return;
-    const currentQuestion = JSON.parse(JSON.stringify(this.state.questions[this.state.currentQuestionIndex]));
     const input = parseInt(e.key, 10);
     const keyChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     if (!keyChoices.includes(input)) return;
+    this.checkAnswer(input);
+  }
+
+  handleKeypadInput(e) {
+    const input = parseInt(e.target.textContent, 10);
+    this.checkAnswer(input);
+  }
+
+  checkAnswer(input) {
+    const currentQuestion = JSON.parse(JSON.stringify(this.state.questions[this.state.currentQuestionIndex]));
+
     clearInterval(timer);
     if (input === currentQuestion.answer) {
       currentQuestion.isUserAnswerCorrect = true;
@@ -300,6 +310,7 @@ class App extends Component {
               question={this.state.currentQuestion}
               timeRemaining={this.state.timeRemaining}
               onStartOver={this.handleStartOver.bind(this)}
+              onKeypadInput={this.handleKeypadInput.bind(this)}
             /> :
             <div>
               <button 

@@ -10,11 +10,11 @@
 .header {
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
 }
 
 .header .brand {
@@ -91,7 +91,6 @@
 
 .quiz-box {
   height: 400px;
-  border: 1px solid black;
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -102,10 +101,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-top: 20px;
 }
 
 #timer {
-  border: 1px solid green;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
   height: 50px;
 }
 
@@ -126,6 +126,22 @@
   height: 100%;
   width: 50%;
   background-color: aqua;
+}
+
+#directions {
+  display: none;
+}
+
+#numbers-input div {
+  padding: 5px 0;
+}
+
+#numbers-input span {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin: 0px 5px;
+  font-size: 20px;
 }
 
 .indicator {
@@ -160,6 +176,10 @@
 .points-display.active {
   transition: all 0.5s;
   transform: translateY(-30px);
+}
+
+#startover {
+  margin-top: 20px;
 }
 
 .startover-button {
@@ -198,10 +218,30 @@
         grid-row: 2 / span 1;
         height: calc(100vh - 50px);
         overflow-y: auto;
-        border: 1px solid black;
+        box-shadow: -2px 4px 7px rgba(0, 0, 0, 0.1);
       }
 
       .modal-wrapper {
         grid-column: 1 / span 1;
+      }
+
+      .quiz-box {
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+      }
+
+      #question {
+        margin-top: 0;
+      }
+
+      #directions {
+        display: block;
+      }
+
+      #numbers-input {
+        display: none;
+      }
+
+      #startover {
+        margin-top: 0;
       }
     }
