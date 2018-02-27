@@ -13,24 +13,32 @@ const Quiz = props => {
                 <div style={progressBarStyle} id="progress-bar"></div>
                 <span id="timer-text">{props.timeRemaining}</span>
             </section>
-            <section id="question">
-                <div id="text">{props.question.text}</div>
-                <div id="directions">{props.question.directions}</div>
-                <div id="numbers-input">
-                    {inputs.map(set => {
-                        return <div key={inputs.indexOf(set)}>
-                            {set.map(input => <span onClick={props.onKeypadInput} key={input}>{input}</span>)}
-                        </div>
-                    })}
-                </div>
-                <div id="result">
-                    <div className={props.question.isUserAnswerCorrect ? 'points-display visible active' : 'points-display'}>
-                        <span className={props.question.isUserAnswerCorrect ? 'active' : ''}>+{props.timeRemaining} points!</span>
+            {!props.isComplete ?
+                <section id="question">
+                    <div id="text">{props.question.text}</div>
+                    <div id="directions">{props.question.directions}</div>
+                    <div id="numbers-input">
+                        {inputs.map(set => {
+                            return <div key={inputs.indexOf(set)}>
+                                {set.map(input => <span onClick={props.onKeypadInput} key={input}>{input}</span>)}
+                            </div>
+                        })}
                     </div>
-                    <span className={props.question.isUserAnswerCorrect === true ? 'active indicator correct' : 'indicator correct'}></span>
-                    <span className={props.question.isUserAnswerCorrect === false ? 'active indicator incorrect' : 'indicator incorrect'}></span>
-                </div>
-            </section>
+                    <div id="result">
+                        <div className={props.question.isUserAnswerCorrect ? 'points-display visible active' : 'points-display'}>
+                            <span className={props.question.isUserAnswerCorrect ? 'active' : ''}>+{props.timeRemaining} points!</span>
+                        </div>
+                        <div className="indicator-wrapper">
+                            <span className={props.question.isUserAnswerCorrect === true ? 'active indicator correct' : 'indicator correct'}></span>
+                            <span className={props.question.isUserAnswerCorrect === false ? 'active indicator incorrect' : 'indicator incorrect'}></span>
+                        </div>
+                    </div>
+                </section> :
+                <section>
+                    <div>Your Score: {props.score}</div>
+                </section>
+            }
+            
             <section id="startover">
                 <button 
                     type="button"

@@ -10,20 +10,69 @@ const timeAllowed = 10;
 const initialState = {
   questions: [
     {
-      text: 'What is 2 + 2?',
+      text: 'What is (2 + 2) * 2?',
+      answer: 8,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 72 / 12?',
+      answer: 6,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 2 * 2 / 4?',
+      answer: 1,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is (3 * 6) / (3 * 3)?',
+      answer: 2,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 125 / 25?',
+      answer: 5,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 6 * 5 - 6 * 4?',
+      answer: 6,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 40 - 36?',
       answer: 4,
       directions: '(Press 0-9 on keyboard to answer.)',
       isUserAnswerCorrect: null
     },
     {
-      text: 'What is 4 + 4?',
-      answer: 8,
+      text: 'What is 9 - (2 * 3)?',
+      answer: 3,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 72 / 12?',
+      answer: 6,
+      directions: '(Press 0-9 on keyboard to answer.)',
+      isUserAnswerCorrect: null
+    },
+    {
+      text: 'What is 72 / 12?',
+      answer: 6,
       directions: '(Press 0-9 on keyboard to answer.)',
       isUserAnswerCorrect: null
     }
   ],
   activeUser: null,
   isStarted: false,
+  isComplete: false,
   currentQuestion: null,
   currentQuestionIndex: 0,
   timeRemaining: timeAllowed,
@@ -126,6 +175,8 @@ class App extends Component {
         this.setState({ currentQuestion, timeRemaining: timeAllowed });
         timer = this.beginTimer();
       } else {
+        const isComplete = true;
+        this.setState({ isComplete });
         if (this.state.activeUser) {
           // const newScores = this.state.highScores.concat([{
           //   score: this.state.score,
@@ -304,11 +355,13 @@ class App extends Component {
           }
         </nav>
         <main className="quiz-wrapper">
-          {!this.state.activeUser ? <div className="notification">Free Play</div> : null}
+          {!this.state.activeUser ? <div className="notification">Free Play<br /><span>(Login for competitive play)</span></div> : null}
           {this.state.isStarted ? 
             <Quiz 
               question={this.state.currentQuestion}
               timeRemaining={this.state.timeRemaining}
+              isComplete={this.state.isComplete}
+              score={this.state.score}
               onStartOver={this.handleStartOver.bind(this)}
               onKeypadInput={this.handleKeypadInput.bind(this)}
             /> :
