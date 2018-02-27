@@ -3,12 +3,12 @@
   height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-columns: auto 200px;
+  grid-template-columns: auto;
   grid-template-rows: 50px auto;
 }
 
 .header {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   border: 1px solid black;
   display: flex;
@@ -18,8 +18,8 @@
 }
 
 .header .brand {
-  margin: 0 40px;
-  font-size: 32px;
+  margin: 0 20px;
+  font-size: 24px;
 }
 
 .header div {
@@ -42,15 +42,11 @@
 }
 
 .scores-wrapper {
-  grid-column: 2 / span 1;
-  grid-row: 2 / span 1;
-  height: calc(100vh - 50px);
-  overflow-y: auto;
-  border: 1px solid black;
+  display: none;
 }
 
 .modal-wrapper {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 1;
   grid-row: 1 / span 2;
   height: 100%;
   width: 100%;
@@ -176,3 +172,36 @@
 .startover-button:hover {
   cursor: pointer;
 }
+
+    @media (min-width: 767px) {
+      .App {
+        text-align: center;
+        height: 100vh;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: auto 200px;
+        grid-template-rows: 50px auto;
+      }
+
+      .header {
+        grid-column: 1 / span 2;
+      }
+
+      .header .brand {
+        margin: 0 40px;
+        font-size: 32px;
+      }
+
+      .scores-wrapper {
+        display: block;
+        grid-column: 2 / span 1;
+        grid-row: 2 / span 1;
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+        border: 1px solid black;
+      }
+
+      .modal-wrapper {
+        grid-column: 1 / span 1;
+      }
+    }
