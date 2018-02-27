@@ -58,14 +58,14 @@ const initialState = {
       isUserAnswerCorrect: null
     },
     {
-      text: 'What is 72 / 12?',
-      answer: 6,
+      text: 'What is 10 * 3 - 29?',
+      answer: 1,
       directions: '(Press 0-9 on keyboard to answer.)',
       isUserAnswerCorrect: null
     },
     {
-      text: 'What is 72 / 12?',
-      answer: 6,
+      text: 'What is 49 / 7?',
+      answer: 7,
       directions: '(Press 0-9 on keyboard to answer.)',
       isUserAnswerCorrect: null
     }
@@ -178,13 +178,6 @@ class App extends Component {
         const isComplete = true;
         this.setState({ isComplete });
         if (this.state.activeUser) {
-          // const newScores = this.state.highScores.concat([{
-          //   score: this.state.score,
-          //   username: this.state.activeUser
-          // }]);
-          // const newState = this.state;
-          // newState.highScores = newScores;
-          // this.setState(newState);
           this.postData('/api/score', {
             username: this.state.activeUser,
             score: this.state.score
