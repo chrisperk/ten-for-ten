@@ -17,23 +17,25 @@ const SignUpModal = props => {
                     <div>Logged in as {props.activeUser}</div>
                 </div> :
                 <form onSubmit={props.onSignUpSubmit}>
-                    <label htmlFor="username">Username:</label>
                     <input 
                         type="text"
                         id="signup-username"
                         name="signup-username" 
+                        placeholder="Username"
                         value={props.signUpModal.input.username} 
                         onChange={e => props.onUsernameChange(e)} />
-                    <br />
-                    <label htmlFor="password">Password:</label>
                     <input 
                         type="password"
                         id="signup-password"
-                        name="signup-password" 
+                        name="signup-password"
+                        placeholder="Password" 
                         value={props.signUpModal.input.password} 
                         onChange={e => props.onPasswordChange(e)} />
-                        <br />
-                    <button type="submit">Submit</button>
+                    <button 
+                        type="submit" 
+                        className="submit-button">
+                        Submit
+                    </button>
                 </form>
             }
         </div>

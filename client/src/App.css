@@ -78,6 +78,10 @@
   z-index: 2;
   transform: translateY(-130%);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal.active {
@@ -287,6 +291,31 @@
 
 .startover-button:hover {
   cursor: pointer;
+}
+
+input {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: #F8F9FA;
+  font-size: 16px;
+}
+
+.submit-button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px solid #7100B2;
+  background-color: #7100B2;
+  color: #FEFEFA;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  color: #FFF5EE;
+  cursor: pointer;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
 }
 
     @media (min-width: 767px) {
