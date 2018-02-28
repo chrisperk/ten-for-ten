@@ -5,6 +5,8 @@
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 50px auto;
+  background-color: #FEFEFA;
+  color: #2F2F2F;
 }
 
 .header {
@@ -20,6 +22,7 @@
 .header .brand {
   margin: 0 20px;
   font-size: 24px;
+  color: #7100B2;
 }
 
 .header div {
@@ -61,16 +64,24 @@
   justify-content: center;
 }
 
-.start-button {
+.modal {
+  border-radius: 40px;
+}
+
+#start-button {
   padding: 40px 60px;
   font-size: 40px;
   font-weight: 700;
-  border: 4px solid black;
+  border: 4px solid #38B271;
   border-radius: 20px;
+  color: #FEFEFA;
+  background-color: #38B271;
 }
 
-.start-button:hover {
+#start-button:hover {
   cursor: pointer;
+  color: #FFF5EE;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
 }
 
 .notification {
@@ -84,13 +95,31 @@
 }
 
 .nav-buttons > span {
-  border: 2px solid black;
   padding: 6px 12px;
   border-radius: 8px;
+  border: 2px solid #7100B2;
 }
 
 .nav-buttons > span:hover {
   cursor: pointer;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+}
+
+#login-button {
+  color: #7100B2;
+}
+
+#login-button:hover {
+  background-color: #FFF5EE;
+}
+
+#signup-button {
+  background-color: #7100B2;
+  color: #FEFEFA;
+}
+
+#signup-button:hover {
+  color: #FFF5EE;
 }
 
 .quiz-box {
@@ -98,6 +127,8 @@
   width: 400px;
   display: flex;
   flex-direction: column;
+  border-radius: 40px;
+  overflow: hidden;
 }
 
 #question {
@@ -108,6 +139,10 @@
   margin-top: 20px;
 }
 
+#question > #text {
+  font-size: 32px;
+}
+
 #timer {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
   height: 50px;
@@ -115,7 +150,7 @@
 
 #progress-bar {
   height: 50px;
-  background-color: purple;
+  background-color: #7100B2;
   transition: all 1s linear;
 }
 
@@ -123,6 +158,9 @@
   position: relative;
   display: inline;
   bottom: 35px;
+  padding: 5px;
+  border-radius: 25%;
+  background-color: #FEFEFA;
 }
 
 #time-remaining {
@@ -199,10 +237,16 @@
 }
 
 .startover-button {
-  border: 2px solid black;
+  border: 2px solid #38B271;
+  color: #38B271;
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 16px;
+}
+
+.startover-button:hover {
+  background-color: #FFF5EE;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
 }
 
 .startover-button:hover {

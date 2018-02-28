@@ -34,7 +34,7 @@ const Quiz = props => {
                         </div>
                     </div>
                 </section> :
-                <section>
+                <section id="question">
                     <div>Your Score: {props.score}</div>
                 </section>
             }

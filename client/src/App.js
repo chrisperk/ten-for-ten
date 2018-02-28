@@ -340,9 +340,15 @@ class App extends Component {
               <a onClick={this.handleLogout.bind(this)}>(Logout)</a>
             </div> :
             <div className="nav-buttons">
-              <span onClick={this.handleOpenLoginModal.bind(this)}>Login</span>
-              <span onClick={this.handleOpenSignUpModal.bind(this)}>
+              <span 
+                id="signup-button"
+                onClick={this.handleOpenSignUpModal.bind(this)}>
                 Sign Up
+              </span>
+              <span
+                id="login-button" 
+                onClick={this.handleOpenLoginModal.bind(this)}>
+                Login
               </span>
             </div>
           }
@@ -361,7 +367,7 @@ class App extends Component {
             <div>
               <button 
                 type="button"
-                className="start-button" 
+                id="start-button" 
                 onClick={this.startQuiz.bind(this)}>
                 Start
               </button>
