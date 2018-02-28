@@ -3,9 +3,10 @@ import './LoginModal.css';
 
 const LoginModal = props => {
     return (
-        <div className="modal">
+        <div className={props.loginModal.isShown ? "modal active" : "modal"}>
             <span 
                 className="close-button"
+                aria-label="Close Login Modal"
                 onClick={e => props.onCloseModal(e)}>
                 &times;
             </span>

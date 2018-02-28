@@ -57,7 +57,7 @@
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  visibility: hidden;
   position: absolute;
 }
 
@@ -65,6 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  visibility: visible;
 }
 
 .modal {
@@ -75,6 +76,12 @@
   background-color: white;
   position: relative;
   z-index: 2;
+  transform: translateY(-130%);
+  transition: transform 0.3s ease;
+}
+
+.modal.active {
+  transform: translateY(0);
 }
 
 .close-button {
@@ -111,6 +118,7 @@
   padding-bottom: 40px;
   font-size: 32px;
   font-weight: 400;
+  display: none;
 }
 
 .notification > span {
@@ -146,11 +154,11 @@
 }
 
 .quiz-box {
-  height: 400px;
+  height: 100%;
   width: 400px;
   display: flex;
   flex-direction: column;
-  border-radius: 40px;
+  justify-content: space-around;
   overflow: hidden;
 }
 
@@ -159,11 +167,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: 20px;
 }
 
 #question > #text {
   font-size: 32px;
+  margin-bottom: 20px;
 }
 
 #timer {
@@ -173,7 +181,7 @@
 
 #progress-bar {
   height: 50px;
-  background-color: #7100B2;
+  background-color: #FFC14F;
   transition: all 1s linear;
 }
 
@@ -213,6 +221,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
 }
 
 .indicator {
@@ -272,6 +281,10 @@
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
 }
 
+.final-score {
+  font-size: 40px;
+}
+
 .startover-button:hover {
   cursor: pointer;
 }
@@ -307,9 +320,20 @@
       .modal-wrapper {
         grid-column: 1 / span 1;
       }
+      
+      .notification {
+        display: block;
+      }
 
       .quiz-box {
         box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+        height: 400px;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: initial;
+        margin-top: 20px;
+        border-radius: 40px;
       }
 
       #question {

@@ -3,9 +3,10 @@ import React from 'react';
 
 const SignUpModal = props => {
     return (
-        <div className="modal">
+        <div className={props.signUpModal.isShown ? "modal active" : "modal"}>
             <span 
                 className="close-button"
+                aria-label="Close Sign Up Modal"
                 onClick={e => props.onCloseModal(e)}>
                 &times;
             </span>
