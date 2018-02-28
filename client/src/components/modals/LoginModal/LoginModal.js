@@ -4,6 +4,11 @@ import './LoginModal.css';
 const LoginModal = props => {
     return (
         <div className="modal">
+            <span 
+                className="close-button"
+                onClick={e => props.onCloseModal(e)}>
+                &times;
+            </span>
             <h1>Login</h1>
             {props.activeUser ?
                 <div>

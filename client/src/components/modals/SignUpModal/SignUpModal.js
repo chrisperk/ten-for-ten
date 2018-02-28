@@ -1,9 +1,14 @@
 import React from 'react';
-import './SignUpModal.css';
+// import './SignUpModal.css';
 
 const SignUpModal = props => {
     return (
         <div className="modal">
+            <span 
+                className="close-button"
+                onClick={e => props.onCloseModal(e)}>
+                &times;
+            </span>
             <h1>Sign Up</h1>
             {props.activeUser ?
                 <div>

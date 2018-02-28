@@ -280,9 +280,9 @@ class App extends Component {
   handleCloseModal(e) {
     console.log(e.target);
     const modalWrappers = Array.from(document.querySelectorAll('.modal-wrapper'));
-    console.log(modalWrappers);
+    const closeButtons = Array.from(document.querySelectorAll('.close-button'));
 
-    if (modalWrappers.includes(e.target)) {
+    if (modalWrappers.includes(e.target) || closeButtons.includes(e.target)) {
       const newSignupState = this.state.signUpModal;
       newSignupState.isShown = false;
       const newLoginState = this.state.loginModal;
@@ -316,7 +316,8 @@ class App extends Component {
             activeUser={this.state.activeUser}
             onUsernameChange={this.handleSignUpUsernameChange.bind(this)}
             onPasswordChange={this.handleSignUpPasswordChange.bind(this)}
-            onSignUpSubmit={this.handleSignUpSubmit.bind(this)} />
+            onSignUpSubmit={this.handleSignUpSubmit.bind(this)}
+            onCloseModal={this.handleCloseModal.bind(this)} />
         </div>
         <div 
           className={
@@ -330,7 +331,8 @@ class App extends Component {
             activeUser={this.state.activeUser}
             onUsernameChange={this.handleLoginUsernameChange.bind(this)}
             onPasswordChange={this.handleLoginPasswordChange.bind(this)}
-            onLoginSubmit={this.handleLoginSubmit.bind(this)} />
+            onLoginSubmit={this.handleLoginSubmit.bind(this)}
+            onCloseModal={this.handleCloseModal.bind(this)} />
         </div>
         <nav className="header">
           <div className="brand">Ten for Ten</div>

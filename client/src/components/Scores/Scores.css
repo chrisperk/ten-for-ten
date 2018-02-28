@@ -4,3 +4,7 @@
     justify-content: center;
     height: 100%;
 }
+
+.scores-panel ol {
+    border: 2px solid transparent;
+}
