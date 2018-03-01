@@ -46,7 +46,7 @@ var signinStrategy = new _passportLocal2.default(function (username, password, d
 });
 
 var jwtOptions = {
-  secretOrKey: process.env.SECRET,
+  secretOrKey: 'abc123',
   jwtFromRequest: _passportJwt.ExtractJwt.fromHeader('authorization')
 };
 

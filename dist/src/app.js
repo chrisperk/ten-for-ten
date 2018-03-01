@@ -32,7 +32,7 @@ require('dotenv').config();
 
 
 _mongoose2.default.Promise = global.Promise;
-_mongoose2.default.connect('mongodb://localhost/ten-for-ten').then(function () {
+_mongoose2.default.connect('mongodb://chrisperk2:iAmADB!@ds161493.mlab.com:61493/ten-for-ten').then(function () {
     return console.log('[mongoose] Connected to MongoDB');
 }).catch(function () {
     return console.log('[mongoose] Error connecting to MongoDB');
@@ -49,7 +49,7 @@ app.get('/api/secret', authStrategy, function (req, res) {
     res.send('The current user is ' + req.user.username);
 });
 
-var port = process.env.PORT || 3001;
+var port = 3001;
 app.listen(port, function () {
     console.log('Listening on port:' + port);
 });
