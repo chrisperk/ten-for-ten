@@ -9,7 +9,7 @@ import ScoreRouter from './routes/ScoreRoutes';
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/ten-for-ten')
+  .connect('mongodb://chrisperk2:iAmADB!@ds161493.mlab.com:61493/ten-for-ten')
   .then(() => console.log('[mongoose] Connected to MongoDB'))
   .catch(() => console.log('[mongoose] Error connecting to MongoDB'));
 
@@ -24,7 +24,7 @@ app.get('/api/secret', authStrategy, (req, res) => {
     res.send(`The current user is ${req.user.username}`);
 });
 
-const port = process.env.PORT || 3001;
+const port = 3001;
 app.listen(port, () => {
     console.log(`Listening on port:${port}`);
 });
