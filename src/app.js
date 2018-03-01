@@ -9,7 +9,7 @@ import ScoreRouter from './routes/ScoreRoutes';
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect('mongodb://localhost/ten-for-ten')
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/ten-for-ten')
   .then(() => console.log('[mongoose] Connected to MongoDB'))
   .catch(() => console.log('[mongoose] Error connecting to MongoDB'));
 

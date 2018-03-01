@@ -9,6 +9,9 @@
     "start": "yarn run build && node dist/src/app.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
+  "engines": {
+    "node": "7.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chrisperk/ten-for-ten.git"
