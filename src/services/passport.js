@@ -32,7 +32,7 @@ const signinStrategy = new LocalStrategy(function (username, password, done) {
 });
 
 const jwtOptions = {
-  secretOrKey: 'abc123',
+  secretOrKey: process.env.SECRET,
   jwtFromRequest: ExtractJwt.fromHeader('authorization')
 };
 

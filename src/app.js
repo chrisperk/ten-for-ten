@@ -10,7 +10,7 @@ import path from 'path';
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect('mongodb://chrisperk2:iAmADB!@ds161493.mlab.com:61493/ten-for-ten')
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/ten-for-ten')
   .then(() => console.log('[mongoose] Connected to MongoDB'))
   .catch(() => console.log('[mongoose] Error connecting to MongoDB'));
 
