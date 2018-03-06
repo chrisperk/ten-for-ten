@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 import bcrypt from 'bcrypt';
 import passport from 'passport';
 import User from '../models/UserModel';
@@ -7,6 +7,7 @@ import {
   ExtractJwt
 } from 'passport-jwt';
 import LocalStrategy from 'passport-local';
+import envVars from '../config';
 
 const signinStrategy = new LocalStrategy(function (username, password, done) {
   User.findOne({ username }).exec()
@@ -31,8 +32,10 @@ const signinStrategy = new LocalStrategy(function (username, password, done) {
     .catch(error => done(error, false));
 });
 
+console.log(envVars);
+
 const jwtOptions = {
-  secretOrKey: process.env.SECRET,
+  secretOrKey: envVars.SECRET,
   jwtFromRequest: ExtractJwt.fromHeader('authorization')
 };
 

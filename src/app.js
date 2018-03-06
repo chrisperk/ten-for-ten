@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -7,10 +7,11 @@ import AuthRouter from './routes/AuthRoutes';
 import './services/passport';
 import ScoreRouter from './routes/ScoreRoutes';
 import path from 'path';
+import envVars from './config';
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/ten-for-ten')
+  .connect(envVars.MONGODB_URI || 'mongodb://localhost/ten-for-ten')
   .then(() => console.log('[mongoose] Connected to MongoDB'))
   .catch(() => console.log('[mongoose] Error connecting to MongoDB'));
 
@@ -31,7 +32,7 @@ app.get('*', (req, res) => {
     res.sendFile('client/build/index.html');
   });
 
-const port = process.env.PORT || 3001;
+const port = envVars.PORT || 3001;
 app.listen(port, () => {
     console.log(`Listening on port:${port}`);
 });
