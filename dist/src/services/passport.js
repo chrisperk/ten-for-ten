@@ -18,11 +18,13 @@ var _passportLocal = require('passport-local');
 
 var _passportLocal2 = _interopRequireDefault(_passportLocal);
 
+var _config = require('../config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-require('dotenv').config();
-
-
+// require('dotenv').config();
 var signinStrategy = new _passportLocal2.default(function (username, password, done) {
   _UserModel2.default.findOne({ username: username }).exec().then(function (user) {
     if (!user) {
@@ -45,8 +47,10 @@ var signinStrategy = new _passportLocal2.default(function (username, password, d
   });
 });
 
+console.log(_config2.default);
+
 var jwtOptions = {
-  secretOrKey: 'abc123',
+  secretOrKey: _config2.default.SECRET,
   jwtFromRequest: _passportJwt.ExtractJwt.fromHeader('authorization')
 };
 

@@ -30,13 +30,15 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-require('dotenv').config();
+_mongoose2.default.Promise = global.Promise; // require('dotenv').config();
 
-
-_mongoose2.default.Promise = global.Promise;
-_mongoose2.default.connect('mongodb://chrisperk2:iAmADB!@ds161493.mlab.com:61493/ten-for-ten').then(function () {
+_mongoose2.default.connect(_config2.default.MONGODB_URI || 'mongodb://localhost/ten-for-ten').then(function () {
     return console.log('[mongoose] Connected to MongoDB');
 }).catch(function () {
     return console.log('[mongoose] Error connecting to MongoDB');
@@ -59,7 +61,7 @@ app.get('*', function (req, res) {
     res.sendFile('client/build/index.html');
 });
 
-var port = 3001;
+var port = _config2.default.PORT || 3001;
 app.listen(port, function () {
     console.log('Listening on port:' + port);
 });
